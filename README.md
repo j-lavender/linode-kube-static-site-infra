@@ -1,9 +1,18 @@
-Linode Static Site Infrastructure (in Kube!)
+Linode Static Site Infrastructure (in Kube!)<!-- omit in toc -->
 ===============
 
 The following configuration will deploy a [Linode](https://linode.com) Kubernetes Cluster and NodeBalancer with Terraform, install the necessary Kubernetes resources to serve a static website, and deploy a [Jekyll](https://jekyllrb.com/) site using Helm.
 
 The jekyll site provided in this repo is an example and includes a basic Dockerfile and script for building and pushing the images to Dockerhub.
+
+- [Usage](#usage)
+  - [Hard-mode](#hard-mode)
+    - [Infrastructure](#infrastructure)
+    - [Site Development](#site-development)
+    - [Deploy](#deploy)
+    - [Update the website](#update-the-website)
+  - [Secrets Support](#secrets-support)
+- [Improvement Notes](#improvement-notes)
 
 ## Usage
 
@@ -70,6 +79,21 @@ The jekyll site provided in this repo is an example and includes a basic Dockerf
         helm upgrade site charts/site --values charts/site/values.yaml -f charts/site/override.yaml
 
 
+### Secrets Support
+
+Using this repo requires providing a Linode API key in an environment variable. It is highly recommended to use a secrets manager to pass `TF_VAR_token`.
+
+If you do not have a password manager, I recommend checking out Doppler. Here are the steps to get started.
+
+1. [Signup](https://dashboard.doppler.com/register) for a Doppler account.
+2. Create a project. (example-project is created by default and is not recommended)
+3. Inside one of the new project's environments, create a secret named `TOKEN` and provide the Linode API key.
+4. [Install](https://docs.doppler.com/docs/install-cli) the Doppler CLI.
+5. Login from any directory: `doppler login`.
+6. From this project's directory: `doppler setup`. Choose the project and environment created in step 2.
+7. Uncomment the Doppler line in the provided `.envrc`.
+8. `direnv allow`
+
 ## Improvement Notes
 
 - If the NGINX Ingress Controller is not destroyed prior to destroying the infrastructure using Terraform, the Linode NodeBalancer will continue to exist within the account. This must be deleted manually. Automation for this process will come with a new version of this project.
@@ -80,7 +104,6 @@ The jekyll site provided in this repo is an example and includes a basic Dockerf
     - Image tags need an env var.
     - Helm should use env vars to identify new for deployment.
     - CI/CD pipeline for use in Gitlab/Github/etc.
-    - Implement support for secrets management.
     - Implement terraform backend support for state management.
 
 - Add autoscaler support to LKE cluster.
