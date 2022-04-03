@@ -82,3 +82,5 @@ The jekyll site provided in this repo is an example and includes a basic Dockerf
     - CI/CD pipeline for use in Gitlab/Github/etc.
     - Implement support for secrets management.
     - Implement terraform backend support for state management.
+
+- Add autoscaler support to LKE cluster.
