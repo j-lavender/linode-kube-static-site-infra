@@ -84,3 +84,5 @@ The jekyll site provided in this repo is an example and includes a basic Dockerf
     - Implement terraform backend support for state management.
 
 - Add autoscaler support to LKE cluster.
+
+- CertManager Helm flag did not generate namespace as indicated in the docs. This step had to be manually added to `cert-manager-v1.7.2.yaml`. This will be a problem for upgrading in the future.
