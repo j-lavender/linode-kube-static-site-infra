@@ -1,0 +1,10 @@
+_site
+vendor
+.sass-cache
+.jekyll-cache
+.jekyll-metadata
+.kube-config
+*.tfstate
+*.tfstate.backup
+.terraform
+.terraform.lock.hcl
