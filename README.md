@@ -57,7 +57,7 @@ The jekyll site provided in this repo is an example and includes a basic Dockerf
 
 2. Install the new site. _Value files are read left->right and will overwrite in that order._
 
-    helm install site charts/site --values charts/site/values.yaml -f charts/site/override.yaml    
+        helm install site charts/site --values charts/site/values.yaml -f charts/site/override.yaml    
 
 #### Update the website
 
@@ -67,7 +67,7 @@ The jekyll site provided in this repo is an example and includes a basic Dockerf
 
 3. Use Helm to perform a rolling upgrade.
 
-    helm upgrade site charts/site --values charts/site/values.yaml -f charts/site/override.yaml
+        helm upgrade site charts/site --values charts/site/values.yaml -f charts/site/override.yaml
 
 
 ## Improvement Notes
