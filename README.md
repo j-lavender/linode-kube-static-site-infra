@@ -44,6 +44,7 @@ The jekyll site provided in this repo is an example and includes a basic Dockerf
 
 5. Apply the Kubernetes manifest configurations for necessary services. **_Apply in order!_**
 
+        # /manifests
         kubectl apply -f nginx-ingress-controller-v4.0.19.yaml
         kubectl apply -f cert-manager-v1.7.2.yaml
         kubectl apply -f cert-manager-clusterissuer.yaml
@@ -64,9 +65,9 @@ The jekyll site provided in this repo is an example and includes a basic Dockerf
 
 1. Use `charts/site/override.yaml` to set the necessary values for the project site.
 
-2. Install the new site. _Value files are read left->right and will overwrite in that order._
+2. Install the new site. _Uses LetsEncrypt Staging setup. Apply override.yaml to apply production certs_
 
-        helm install site charts/site --values charts/site/values.yaml -f charts/site/override.yaml    
+        helm install site charts/site --values charts/site/values.yaml 
 
 #### Update the website
 
@@ -74,9 +75,9 @@ The jekyll site provided in this repo is an example and includes a basic Dockerf
 
 2. Use `/site/deploy/docker.sh` to build the new image.
 
-3. Use Helm to perform a rolling upgrade.
+3. Use Helm to perform a rolling upgrade. _Value files are read left->right and will overwrite in that order._
 
-        helm upgrade site charts/site --values charts/site/values.yaml -f charts/site/override.yaml
+        helm upgrade site charts/site -f charts/site/values.yaml -f charts/site/override.yaml
 
 
 ### Secrets Support
