@@ -11,12 +11,14 @@ ingress:
     cert-manager.io/cluster-issuer: "certmanager-production-issuer"
   }
   hosts:
-    - host: kube.jameslavender.com
+    - host: kube.example.com
       paths:
         - path: /
+          pathType: ImplementationSpecific
   tls:
+   - secretName: le-secret-production
      hosts:
-       - kube.jameslavender.com
+       - kube.example.com
 
 autoscaling:
   enabled: true
